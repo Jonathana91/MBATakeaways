@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MBA Takeaways</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f38;
+    --navy-mid: #1a2f50;
+    --navy-light: #2a3f60;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5ecd6;
+    --cream: #faf8f4;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --text-mid: #4a4a5a;
+    --text-muted: #7a7a8a;
+    --border: rgba(15,31,56,0.1);
+    --border-mid: rgba(15,31,56,0.18);
+    --tag-finance-bg: #e8f0fb; --tag-finance: #1a3a70;
+    --tag-strategy-bg: #e4f3ec; --tag-strategy: #0f4a2a;
+    --tag-leadership-bg: #f0eaf8; --tag-leadership: #3a1a70;
+    --tag-comms-bg: #fdf0e0; --tag-comms: #6a3a0a;
+    --tag-mgmt-bg: #fde8e8; --tag-mgmt: #6a1a1a;
+    --tag-books-bg: #e8f5f5; --tag-books: #0a4a4a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 32px;
+    height: 56px;
+    box-shadow: 0 1px 0 rgba(201,168,76,0.2);
+  }
+  .nav-logo {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+    cursor: pointer;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-btn {
+    background: none; border: none;
+    color: rgba(255,255,255,0.65);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 400;
+    padding: 6px 12px; border-radius: 6px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .nav-btn:hover, .nav-btn.active { color: var(--white); background: rgba(255,255,255,0.08); }
+  .nav-btn.active { color: var(--gold); }
+
+  .nav-search {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 5px 12px;
+  }
+  .nav-search input {
+    background: none; border: none; outline: none;
+    color: var(--white); font-family: 'DM Sans', sans-serif;
+    font-size: 13px; width: 180px;
+  }
+  .nav-search input::placeholder { color: rgba(255,255,255,0.35); }
+  .search-icon { color: rgba(255,255,255,0.4); font-size: 13px; }
+
+  /* ─── VIEWS ─── */
+  .view { display: none; }
+  .view.active { display: block; }
+
+  /* ─── HOME HERO ─── */
+  .hero {
+    background: var(--navy);
+    padding: 56px 64px 48px;
+    position: relative; overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 40%; height: 100%;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Ccircle cx='300' cy='150' r='200' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.15'/%3E%3Ccircle cx='300' cy='150' r='150' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.1'/%3E%3Ccircle cx='300' cy='150' r='100' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.08'/%3E%3C/svg%3E") no-repeat center right;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 44px; line-height: 1.15;
+    color: var(--white); max-width: 560px;
+    font-weight: 400; margin-bottom: 16px;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: italic; }
+  .hero p { color: rgba(255,255,255,0.6); max-width: 480px; font-size: 15px; line-height: 1.7; margin-bottom: 32px; }
+  .hero-stats { display: flex; gap: 40px; }
+  .stat-num { font-family: 'Instrument Serif', serif; font-size: 32px; color: var(--white); line-height: 1; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 4px; letter-spacing: 0.3px; }
+
+  /* ─── FILTER BAR ─── */
+  .filter-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 32px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-label { font-size: 12px; color: var(--text-muted); margin-right: 4px; }
+  .filter-btn {
+    background: none; border: 1px solid var(--border-mid);
+    border-radius: 20px; padding: 4px 14px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px;
+    color: var(--text-mid); cursor: pointer; transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--navy); color: var(--navy); }
+  .filter-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+  /* ─── MAIN CONTENT AREA ─── */
+  .content-wrap { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+
+  /* ─── SECTION TITLES ─── */
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px; font-weight: 400; color: var(--navy);
+  }
+  .section-count { font-size: 12px; color: var(--text-muted); }
+
+  /* ─── COURSE CARDS GRID ─── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px; margin-bottom: 48px;
+  }
+  .course-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 22px;
+    cursor: pointer; transition: all 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .course-card:hover { border-color: var(--navy-light); box-shadow: 0 4px 16px rgba(15,31,56,0.08); transform: translateY(-1px); }
+  .course-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+  .course-card h3 { font-size: 14px; font-weight: 500; color: var(--navy); line-height: 1.4; flex: 1; }
+  .course-card p { font-size: 13px; color: var(--text-muted); line-height: 1.5; flex: 1; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+  .card-meta { font-size: 11px; color: var(--text-muted); }
+  .card-arrow { font-size: 16px; color: var(--text-muted); transition: transform 0.15s; }
+  .course-card:hover .card-arrow { transform: translateX(3px); color: var(--navy); }
+
+  /* ─── TAGS ─── */
+  .tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    padding: 3px 9px; border-radius: 20px; margin-bottom: 10px;
+    letter-spacing: 0.2px;
+  }
+  .tag-finance { background: var(--tag-finance-bg); color: var(--tag-finance); }
+  .tag-strategy { background: var(--tag-strategy-bg); color: var(--tag-strategy); }
+  .tag-leadership { background: var(--tag-leadership-bg); color: var(--tag-leadership); }
+  .tag-comms { background: var(--tag-comms-bg); color: var(--tag-comms); }
+  .tag-mgmt { background: var(--tag-mgmt-bg); color: var(--tag-mgmt); }
+  .tag-books { background: var(--tag-books-bg); color: var(--tag-books); }
+
+  /* ─── TWO COLUMN LAYOUT ─── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 48px; }
+  @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ─── BOOK LIST ─── */
+  .book-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 10px;
+    cursor: pointer; margin-bottom: 10px; transition: all 0.15s;
+  }
+  .book-item:hover { border-color: var(--navy-light); box-shadow: 0 2px 8px rgba(15,31,56,0.06); }
+  .book-spine { width: 6px; height: 48px; border-radius: 3px; flex-shrink: 0; }
+  .book-info h4 { font-size: 13px; font-weight: 500; color: var(--navy); }
+  .book-info p { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .book-count { margin-left: auto; font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+
+  /* ─── RECENT NOTES ─── */
+  .note-item {
+    padding: 13px 16px; background: var(--white);
+    border: 1px solid var(--border); border-radius: 10px;
+    cursor: pointer; margin-bottom: 10px; transition: all 0.15s;
+  }
+  .note-item:hover { border-color: var(--navy-light); box-shadow: 0 2px 8px rgba(15,31,56,0.06); }
+  .note-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .note-cat { font-size: 11px; font-weight: 500; color: var(--gold); }
+  .note-date { font-size: 11px; color: var(--text-muted); }
+  .note-item h4 { font-size: 13px; font-weight: 500; color: var(--navy); }
+
+  /* ─── CONCEPTS FOOTER ─── */
+  .concepts-strip {
+    background: var(--navy);
+    padding: 20px 32px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  }
+  .concepts-label { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; text-transform: uppercase; margin-right: 8px; }
+  .concept-pill {
+    font-size: 12px; color: rgba(255,255,255,0.6);
+    padding: 4px 12px; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px; cursor: pointer; transition: all 0.15s;
+  }
+  .concept-pill:hover { color: var(--gold-light); border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.08); }
+
+  /* ─── COURSE DETAIL VIEW ─── */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    color: var(--text-muted); padding: 0; margin-bottom: 28px;
+    transition: color 0.15s;
+  }
+  .back-btn:hover { color: var(--navy); }
+
+  .course-hero {
+    background: var(--navy); border-radius: 14px;
+    padding: 32px 36px; margin-bottom: 32px;
+  }
+  .course-hero-eyebrow { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+  .course-hero h2 { font-family: 'Instrument Serif', serif; font-size: 28px; color: var(--white); font-weight: 400; margin-bottom: 8px; }
+  .course-hero p { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 500px; }
+
+  /* ─── NOTE CARDS ─── */
+  .note-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 16px; overflow: hidden;
+  }
+  .note-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px; cursor: pointer; transition: background 0.15s;
+  }
+  .note-card-header:hover { background: rgba(15,31,56,0.02); }
+  .note-card-title { font-size: 15px; font-weight: 500; color: var(--navy); }
+  .note-card-date { font-size: 12px; color: var(--text-muted); }
+  .note-toggle { font-size: 18px; color: var(--text-muted); transition: transform 0.2s; user-select: none; }
+  .note-card.open .note-toggle { transform: rotate(45deg); }
+  .note-card-body {
+    display: none; padding: 0 22px 22px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+  .note-card.open .note-card-body { display: block; }
+
+  /* ─── NOTE BODY CONTENT ─── */
+  .note-content { font-size: 14px; color: var(--text-mid); line-height: 1.75; }
+  .note-content h4 { font-size: 14px; font-weight: 500; color: var(--navy); margin: 18px 0 8px; }
+  .note-content h4:first-child { margin-top: 0; }
+  .note-content ul { padding-left: 20px; margin: 6px 0 12px; }
+  .note-content li { margin-bottom: 6px; }
+  .note-content li li { margin-bottom: 4px; font-size: 13px; }
+  .note-content ol { padding-left: 20px; margin: 6px 0 12px; }
+  .note-content ol li { margin-bottom: 8px; }
+  .note-content strong { color: var(--navy); font-weight: 500; }
+  .note-content em { color: var(--text-mid); font-style: italic; }
+  .note-content a { color: var(--gold); text-decoration: none; }
+  .note-content a:hover { text-decoration: underline; }
+  .note-content blockquote {
+    border-left: 3px solid var(--gold);
+    margin: 14px 0; padding: 8px 16px;
+    background: var(--gold-pale); border-radius: 0 6px 6px 0;
+    font-style: italic; color: var(--text-mid);
+  }
+
+  /* ─── SEARCH RESULTS ─── */
+  .search-view { max-width: 800px; margin: 0 auto; padding: 40px 32px; }
+  .search-view h2 { font-family: 'Instrument Serif', serif; font-size: 24px; color: var(--navy); margin-bottom: 6px; }
+  .search-empty { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
+  .search-result-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 12px;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .search-result-item:hover { border-color: var(--navy-light); box-shadow: 0 2px 8px rgba(15,31,56,0.06); }
+  .result-path { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+  .result-title { font-size: 15px; font-weight: 500; color: var(--navy); margin-bottom: 4px; }
+  .result-snippet { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+  mark { background: var(--gold-pale); color: var(--navy); border-radius: 2px; padding: 0 2px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center; padding: 24px;
+    font-size: 12px; color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+
+  /* ─── HIDDEN ─── */
+  .hidden { display: none !important; }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 16px; }
+    .nav-search { display: none; }
+    .hero { padding: 36px 24px 32px; }
+    .hero h1 { font-size: 30px; }
+    .content-wrap { padding: 28px 16px; }
+    .filter-bar { padding: 10px 16px; }
+    .concepts-strip { padding: 16px; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showHome()">MBA<span>Takeaways</span></div>
+  <div class="nav-links">
+    <button class="nav-btn active" onclick="showHome(); setActive(this)">Home</button>
+    <button class="nav-btn" onclick="showSection('courses'); setActive(this)">Courses</button>
+    <button class="nav-btn" onclick="showSection('books'); setActive(this)">Books</button>
+    <button class="nav-btn" onclick="showSection('career'); setActive(this)">Career</button>
+    <button class="nav-btn" onclick="showSection('quotes'); setActive(this)">Quotes &amp; Words</button>
+  </div>
+  <div class="nav-search">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="globalSearch" placeholder="Search notes..." oninput="handleSearch(this.value)" onkeydown="if(event.key==='Enter')handleSearch(this.value)">
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     HOME VIEW
+══════════════════════════════════════ -->
+<div id="view-home" class="view active">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">USC Marshall School of Business</div>
+    <h1>Key lessons from my <em>MBA</em> curriculum</h1>
+    <p>Distilled notes, frameworks, and takeaways from coursework, readings, and career planning — organized for quick reference.</p>
+    <div class="hero-stats">
+      <div><div class="stat-num">7</div><div class="stat-label">Courses</div></div>
+      <div><div class="stat-num">3</div><div class="stat-label">Books</div></div>
+      <div><div class="stat-num">6</div><div class="stat-label">Notes</div></div>
+    </div>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <span class="filter-label">Filter by:</span>
+    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+    <button class="filter-btn" onclick="filterCards('strategy', this)">Strategy</button>
+    <button class="filter-btn" onclick="filterCards('finance', this)">Finance</button>
+    <button class="filter-btn" onclick="filterCards('leadership', this)">Leadership</button>
+    <button class="filter-btn" onclick="filterCards('comms', this)">Communication</button>
+    <button class="filter-btn" onclick="filterCards('mgmt', this)">Management</button>
+    <button class="filter-btn" onclick="filterCards('books', this)">Books</button>
+  </div>
+
+  <div class="content-wrap">
+
+    <!-- Courses -->
+    <div class="section-head">
+      <div class="section-title">MBA Courses</div>
+      <div class="section-count">USC Marshall · 7 courses</div>
+    </div>
+    <div class="cards-grid" id="courseGrid">
+
+      <div class="course-card" data-cat="strategy" onclick="showCourse('strategy-formulation')">
+        <div class="course-card-header">
+          <div>
+            <span class="tag tag-strategy">Strategy</span>
+            <h3>Strategic Formulation for Competitive Analysis</h3>
+          </div>
+        </div>
+        <p>Porter's 5 Forces, competitive advantage, the kernel of good strategy, corporate strategy frameworks.</p>
+        <div class="card-footer">
+          <span class="card-meta">Homepage overview + corporate strategy</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="mgmt" onclick="showCourse('managerial-perspectives')">
+        <div class="course-card-header">
+          <div>
+            <span class="tag tag-mgmt">Management</span>
+            <h3>Managerial Perspectives</h3>
+          </div>
+        </div>
+        <p>Team dynamics, leadership, power and decision-making, organizational behavior, innovation at Google.</p>
+        <div class="card-footer">
+          <span class="card-meta">2 notes</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="comms" onclick="showCourse('communication')">
+        <div class="course-card-header">
+          <div>
+            <span class="tag tag-comms">Communication</span>
+            <h3>Communication for Managers</h3>
+          </div>
+        </div>
+        <p>Executive presentations, Kotter's 8-step change model, storytelling structure, headline-first communication.</p>
+        <div class="card-footer">
+          <span class="card-meta">1 note</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="finance" onclick="showCourse('corporate-financing')">
+        <div class="course-card-header">
+          <div>
+            <span class="tag tag-finance">Finance</span>
+            <h3>Corporate Financing</h3>
+          </div>
+        </div>
+        <p>Capital structure, WACC, M&amp;A, valuation frameworks. Add your notes here.</p>
+        <div class="card-footer">
+          <span class="card-meta">Notes coming soon</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="leadership" onclick="showCourse('influence-power')">
+        <div class="course-card-header">
+          <div>
+            <span class="tag tag-leadership">Leadership</span>
+            <h3>Interpersonal Influence and Power</h3>
+          </div>
+        </div>
+        <p>Negotiation, persuasion, peer influence, power dynamics, and decision-making biases.</p>
+        <div class="card-footer">
+          <span class="card-meta">Notes coming soon</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="finance" onclick="showCourse('financial-analysis')">
+        <div class="course-card-header">
+          <div>
+            <span class="tag tag-finance">Finance</span>
+            <h3>Financial Analysis &amp; Valuation</h3>
+          </div>
+        </div>
+        <p>DCF, comparable company analysis, financial modeling, and valuation multiples.</p>
+        <div class="card-footer">
+          <span class="card-meta">Notes coming soon</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="course-card" data-cat="leadership" onclick="showCourse('org-design')">
+        <div class="course-card-header">
+          <div>
+            <span class="tag tag-leadership">Org Design</span>
+            <h3>Designing High Performance Organizations</h3>
+          </div>
+        </div>
+        <p>Culture, incentives, organizational structure, and high-performance team design.</p>
+        <div class="card-footer">
+          <span class="card-meta">Notes coming soon</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Two col: Books + Recent -->
+    <div class="two-col">
+
+      <div>
+        <div class="section-head">
+          <div class="section-title">Books</div>
+        </div>
+
+        <div class="book-item" onclick="showCourse('behave')">
+          <div class="book-spine" style="background:#534AB7"></div>
+          <div class="book-info">
+            <h4>Behave: The Biology of Humans</h4>
+            <p>Robert Sapolsky</p>
+          </div>
+          <span class="book-count">2 chapters →</span>
+        </div>
+
+        <div class="book-item" onclick="showCourse('think-again')">
+          <div class="book-spine" style="background:#1D9E75"></div>
+          <div class="book-info">
+            <h4>Think Again</h4>
+            <p>Adam Grant</p>
+          </div>
+          <span class="book-count">notes coming →</span>
+        </div>
+
+        <div class="book-item" onclick="showCourse('four-thousand')">
+          <div class="book-spine" style="background:#BA7517"></div>
+          <div class="book-info">
+            <h4>Four Thousand Weeks</h4>
+            <p>Oliver Burkeman</p>
+          </div>
+          <span class="book-count">notes coming →</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-head">
+          <div class="section-title">Recent Notes</div>
+        </div>
+
+        <div class="note-item" onclick="showCourse('managerial-perspectives')">
+          <div class="note-meta"><span class="note-cat">Managerial Perspectives</span><span class="note-date">Apr 17, 2020</span></div>
+          <h4>HBR Article: Managing Your Team</h4>
+        </div>
+        <div class="note-item" onclick="showCourse('managerial-perspectives')">
+          <div class="note-meta"><span class="note-cat">Managerial Perspectives</span><span class="note-date">Apr 17, 2020</span></div>
+          <h4>Additional Thoughts and Takeaways</h4>
+        </div>
+        <div class="note-item" onclick="showCourse('communication')">
+          <div class="note-meta"><span class="note-cat">Communication for Managers</span><span class="note-date">Apr 18, 2020</span></div>
+          <h4>My Takeaways: Communication for Managers</h4>
+        </div>
+        <div class="note-item" onclick="showCourse('behave')">
+          <div class="note-meta"><span class="note-cat">Behave</span><span class="note-date">Apr 26, 2020</span></div>
+          <h4>Chapter 2: One Second Before</h4>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content-wrap -->
+
+  <!-- Concepts strip -->
+  <div class="concepts-strip">
+    <span class="concepts-label">Key concepts</span>
+    <span class="concept-pill" onclick="quickSearch('Porter')">Porter's 5 Forces</span>
+    <span class="concept-pill" onclick="quickSearch('WACC')">WACC</span>
+    <span class="concept-pill" onclick="quickSearch('Kotter')">Kotter's 8 Steps</span>
+    <span class="concept-pill" onclick="quickSearch('psychological safety')">Psychological safety</span>
+    <span class="concept-pill" onclick="quickSearch('amygdala')">Amygdala</span>
+    <span class="concept-pill" onclick="quickSearch('frontal cortex')">Frontal cortex</span>
+    <span class="concept-pill" onclick="quickSearch('power')">Power &amp; decision-making</span>
+    <span class="concept-pill" onclick="quickSearch('culture')">Organizational culture</span>
+    <span class="concept-pill" onclick="quickSearch('70-20-10')">70-20-10 Innovation</span>
+    <span class="concept-pill" onclick="quickSearch('team')">Team effectiveness</span>
+    <span class="concept-pill" onclick="quickSearch('strategy')">Strategy kernel</span>
+    <span class="concept-pill" onclick="quickSearch('expertise')">Expertise &amp; leadership</span>
+  </div>
+
+</div><!-- /view-home -->
+
+
+<!-- ══════════════════════════════════════
+     COURSE DETAIL VIEW
+══════════════════════════════════════ -->
+<div id="view-course" class="view">
+  <div class="content-wrap">
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <div id="courseContent"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SECTION VIEW (courses / books / etc)
+══════════════════════════════════════ -->
+<div id="view-section" class="view">
+  <div class="content-wrap">
+    <button class="back-btn" onclick="showHome()">← Home</button>
+    <div id="sectionContent"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     SEARCH VIEW
+══════════════════════════════════════ -->
+<div id="view-search" class="view">
+  <div class="search-view">
+    <button class="back-btn" onclick="showHome()">← Back</button>
+    <h2 id="searchHeading">Search results</h2>
+    <p class="search-empty" id="searchEmpty"></p>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+
+<footer>
+  MBA Takeaways · USC Marshall School of Business · Built with Claude
+</footer>
+
+
+<!-- ══════════════════════════════════════
+     DATA
+══════════════════════════════════════ -->
+<script>
+const COURSES = {
+  'strategy-formulation': {
+    title: 'Strategic Formulation for Competitive Analysis',
+    tag: 'strategy',
+    tagLabel: 'Strategy',
+    description: 'Frameworks for analyzing competitive dynamics and formulating winning strategy.',
+    notes: [
+      {
+        title: 'What is Strategy?',
+        date: '2020',
+        content: `
+          <h4>The kernel of good strategy</h4>
+          <p>Good strategy is a design that coordinates actions of all the different areas and functions of a corporation and focuses on leveraging the firm's advantage, with coherent action. The kernel of good strategy comprises:</p>
+          <ul>
+            <li>Clear and careful <strong>diagnosis</strong> of the problem — simplifying the complexity</li>
+            <li>An insightful and compelling <strong>guiding policy</strong> — the overall approach to solve the problem</li>
+            <li>A set of <strong>coherent actions</strong> to achieve the guiding policy</li>
+          </ul>
+          <blockquote>A strategy is an integrated, overarching, externally oriented concept of how a firm will achieve its objectives. Strategy answers the 'how', while the mission statement should answer the 'why'.</blockquote>
+
+          <h4>Strategizing and strategic logic</h4>
+          <p>The first question strategists should ask: <em>What is the firm trying to do? What do they want to do?</em></p>
+          <p>Note: A lower price is <strong>not</strong> a sustainable competitive advantage. It has to be backed up with a sustainable cost structure.</p>
+          <p>Strategic logic should account for:</p>
+          <ul>
+            <li>Identifying key advantages</li>
+            <li>Testing those advantages</li>
+            <li>Identifying threats to advantages</li>
+            <li>How to leverage and exploit advantages for improved growth and profitability</li>
+          </ul>
+        `
+      },
+      {
+        title: 'Corporate Strategy',
+        date: '2020',
+        content: `
+          <p>Corporate strategy sits above business-unit strategy and addresses the question of <em>where</em> to compete, not just <em>how</em> to compete.</p>
+          <h4>Key questions in corporate strategy</h4>
+          <ul>
+            <li>Which businesses should we be in?</li>
+            <li>How do we add value across our portfolio?</li>
+            <li>Where can we leverage shared resources, capabilities, or brand?</li>
+          </ul>
+          <h4>Sources of competitive advantage</h4>
+          <ul>
+            <li>Cost leadership — sustainable only if backed by structural cost advantages</li>
+            <li>Differentiation — premium pricing justified by genuine uniqueness</li>
+            <li>Focus — serving a narrow segment exceptionally well</li>
+          </ul>
+        `
+      }
+    ]
+  },
+
+  'managerial-perspectives': {
+    title: 'Managerial Perspectives',
+    tag: 'mgmt',
+    tagLabel: 'Management',
+    description: 'Organizational behavior, team dynamics, leadership, and the psychology of management.',
+    notes: [
+      {
+        title: 'HBR Article: Managing Your Team',
+        date: 'April 17, 2020',
+        content: `
+          <p>Young managers, instead of looking at the team as a collective, are more invested in individual relationships with their subordinates.</p>
+
+          <h4>Two sets of responsibilities for effective team management</h4>
+          <ul>
+            <li><strong>Managing the team's boundary</strong> — scanning the competitive environment and managing relationships with those on whom the team is interdependent (internally in the org)</li>
+            <li><strong>Managing the team itself</strong> — designing the team and facilitating the team process</li>
+          </ul>
+
+          <h4>Assessing team effectiveness</h4>
+          <ul>
+            <li>Does the team's output (decisions, products, services) meet the standard of those who have to use it?</li>
+            <li>Does the team experience contribute to the personal well-being and development of the members?</li>
+            <li>Does the team experience enhance the capability of the members to work and learn together in the future?</li>
+            <li><em>Managers often only rely on the first dimension here.</em></li>
+          </ul>
+
+          <h4>Designing the team</h4>
+          <ul>
+            <li><strong>Setting the agenda</strong> — members need a clear and compelling sense of what is expected of the team, and how that fits into the overall org vision</li>
+            <li><strong>Framework</strong> — how much and what kind of coordination is necessary?</li>
+            <li><strong>Team composition</strong> — manager must choose members with the necessary knowledge and skills. The team is only as strong as the weakest link.</li>
+          </ul>
+
+          <h4>Facilitating the team process</h4>
+          <ul>
+            <li><strong>Shaping culture</strong> — distribution of power and influence, communication patterns, what topics are legitimate for discussion, how conflicts are managed</li>
+            <li><strong>Coaching</strong> — guide team members about how to be effective with timely, specific feedback</li>
+          </ul>
+
+          <h4>Three process hurdles teams must overcome</h4>
+          <ul>
+            <li>Exert sufficient <em>effort</em> to accomplish the task at acceptable performance levels</li>
+            <li>Bring adequate <em>knowledge and skill</em> to bear on the task</li>
+            <li>Employ appropriate <em>task performance strategies</em> for the work and situation</li>
+          </ul>
+
+          <h4>Managing paradox</h4>
+          <ul>
+            <li>Embrace individual differences <em>and</em> collective identity and goals</li>
+            <li>Foster support <em>and</em> confrontation among team members</li>
+            <li>Focus on performance <em>and</em> learning/development — mistakes must be treated as learning, not punishment</li>
+            <li>Balance managerial authority <em>and</em> team member discretion</li>
+          </ul>
+          <blockquote>Great teams do not start out great. They only get that way through experience and practice.</blockquote>
+        `
+      },
+      {
+        title: 'Additional Thoughts and Takeaways',
+        date: 'April 17, 2020',
+        content: `
+          <h4>Applying (and resisting) peer influence</h4>
+          <ul>
+            <li>People are often poor at recognizing why they behave as they do</li>
+            <li>When estimating the causes of their own conduct, people seem especially blind to the large role of peer influence</li>
+          </ul>
+
+          <h4>Power plays into decision making</h4>
+          <ul>
+            <li>Feeling powerful actually <em>increased</em> people's willingness to wait for larger rewards</li>
+            <li>Power also leads to greater risk-taking, illusory control, and heightened reward sensitivity — all tendencies that can lead to disinhibition and poor decision making</li>
+            <li>The overall sense of control that comes with power tends to make people feel <strong>overconfident</strong> in their ability to make good decisions</li>
+          </ul>
+          <blockquote>The most effective leaders bring people around them who critique them. As a power holder, the smartest thing you might ever do is bring people together who will inspect your thinking and who aren't afraid to challenge your ideas. However… the more powerful leaders become, the less of this help they will think they need.</blockquote>
+
+          <h4>Characteristics of effective teams (video)</h4>
+          <ul>
+            <li>Even participation</li>
+            <li>Psychological safety established amongst team members (= empathy)</li>
+          </ul>
+          <p>To foster psychological safety:</p>
+          <ul>
+            <li>Frame work as a learning problem</li>
+            <li>Acknowledge own fallibility</li>
+            <li>Model curiosity and ask questions</li>
+          </ul>
+
+          <h4>The common knowledge problem</h4>
+          <ul>
+            <li><strong>Proximity</strong> — we form relationships with people close to us who are likely to have similar knowledge and experience (a problem for diversity of thought)</li>
+            <li>The common knowledge problem leads to a failure of collective intelligence</li>
+            <li>To solve: focus on <strong>inquiry</strong>, not advocacy</li>
+          </ul>
+          <p>Key takeaways on teams:</p>
+          <ul>
+            <li>Psychological safety</li>
+            <li>Even group participation</li>
+            <li>Avoid common knowledge traps</li>
+            <li>Need diversity in voice</li>
+            <li>Emphasize inquiry over dogmatic advocacy</li>
+          </ul>
+
+          <h4>Google: 70-20-10 formula for innovation</h4>
+          <ul>
+            <li><strong>70%</strong> of engineering resources to enhancements of base business</li>
+            <li><strong>20%</strong> focused on services that significantly extend the core</li>
+            <li><strong>10%</strong> for fringe ideas</li>
+          </ul>
+
+          <h4>Leveraging culture for competitive advantage</h4>
+          <ul>
+            <li>A shared vision helps infuse the organization with meaning and purpose beyond institutional ends</li>
+            <li>To manage organizational culture effectively, managers must be clear about the type of culture and the specific norms and values that will help the organization reach its strategic goals</li>
+            <li>A strong culture requires intensity — people who share the norm must feel strongly enough about it to tell others when the norm is violated</li>
+          </ul>
+
+          <h4>Developing the expert leader</h4>
+          <p>An expert generates "superior reproducible performance of representative tasks" in a domain. Key implications for leadership:</p>
+          <ul>
+            <li>Expertise is learned</li>
+            <li>Expertise is domain specific</li>
+            <li>Expertise is based on knowledge and how it is organized</li>
+            <li>Expertise requires more than just knowledge</li>
+            <li>Other people matter in becoming an expert</li>
+            <li>Expertise is intentional</li>
+          </ul>
+        `
+      }
+    ]
+  },
+
+  'communication': {
+    title: 'Communication for Managers',
+    tag: 'comms',
+    tagLabel: 'Communication',
+    description: 'Executive communication, presentation structure, change management, and storytelling.',
+    notes: [
+      {
+        title: 'My Takeaways: Communication for Managers',
+        date: 'April 18, 2020',
+        content: `
+          <h4>Presentation principles</h4>
+          <ul>
+            <li>What's the big idea? — state it in 20 words or less. Add the 'what's at stake'</li>
+            <li>Watch the iPhone announcement (Steve Jobs) — a masterclass in structure and delivery</li>
+            <li>Less verbiage on decks — think Apple</li>
+            <li>Intros are important, so is the conclusion</li>
+            <li>Structure is key</li>
+            <li><strong>Headline first</strong> — lead with your conclusion, not your narrative</li>
+            <li>Bring all three elements together with an example</li>
+          </ul>
+
+          <h4>Kotter's 8-step process for leading change</h4>
+          <ol>
+            <li><strong>Create a sense of urgency</strong> — help others see the need for change through a bold, aspirational opportunity statement that communicates the importance of acting immediately</li>
+            <li><strong>Build a guiding coalition</strong> — a volunteer army needs a coalition of effective people born of its own ranks to guide it, coordinate it, and communicate its activities</li>
+            <li><strong>Form a strategic vision and initiatives</strong> — clarify how the future will be different from the past and how you can make that future a reality through initiatives linked directly to the vision</li>
+            <li><strong>Enlist a volunteer army</strong> — large-scale change can only occur when massive numbers of people rally around a common opportunity; they must be bought-in and urgent to drive change</li>
+            <li><strong>Enable action by removing barriers</strong> — removing barriers such as inefficient processes and hierarchies provides the freedom necessary to work across silos and generate real impact</li>
+            <li><strong>Generate short-term wins</strong> — wins are molecules of results; they must be recognized, collected, and communicated early and often to track progress and energize volunteers</li>
+            <li><strong>Sustain acceleration</strong> — press harder after the first successes; increasing credibility can improve systems, structures, and policies; be relentless until the vision is reality</li>
+            <li><strong>Institute change</strong> — articulate the connections between new behaviors and organizational success, making sure they continue until they become strong enough to replace old habits</li>
+          </ol>
+          <p><a href="https://www.kotterinc.com/8-steps-process-for-leading-change/" target="_blank">Kotter Inc. — 8 Steps Process →</a></p>
+        `
+      }
+    ]
+  },
+
+  'corporate-financing': {
+    title: 'Corporate Financing',
+    tag: 'finance',
+    tagLabel: 'Finance',
+    description: 'Capital structure, cost of capital, M&A, and corporate financial decisions.',
+    notes: []
+  },
+
+  'influence-power': {
+    title: 'Interpersonal Influence and Power',
+    tag: 'leadership',
+    tagLabel: 'Leadership',
+    description: 'Negotiation, persuasion, power dynamics, and interpersonal effectiveness.',
+    notes: []
+  },
+
+  'financial-analysis': {
+    title: 'Financial Analysis and Valuation',
+    tag: 'finance',
+    tagLabel: 'Finance',
+    description: 'DCF, comparable company analysis, financial modeling, and valuation multiples.',
+    notes: []
+  },
+
+  'org-design': {
+    title: 'Designing High Performance Organizations',
+    tag: 'leadership',
+    tagLabel: 'Org Design',
+    description: 'Culture, incentives, organizational structure, and high-performance team design.',
+    notes: []
+  },
+
+  'behave': {
+    title: 'Behave: The Biology of Humans at Our Best and Worst',
+    tag: 'books',
+    tagLabel: 'Book',
+    description: 'Robert Sapolsky\'s exploration of the biology, neuroscience, and evolution behind human behavior.',
+    notes: [
+      {
+        title: 'Chapter 2: One Second Before',
+        date: 'April 26, 2020',
+        content: `
+          <h4>The amygdala — main role &amp; themes</h4>
+          <ul>
+            <li>The amygdala plays a role both in aggression and in fear and anxiety. Fear and aggression are <strong>not</strong> inevitably intertwined — not all fear causes aggression, and not all aggression is rooted in fear</li>
+            <li>Fear typically increases aggression only in those already prone to it; among the subordinate who lack the option of expressing safely, fear does the opposite</li>
+            <li>The dissociation between fear and aggression is evident in <strong>violent psychopaths</strong> — physiologically and subjectively they are less reactive to pain; their amygdalae are relatively unresponsive to typical fear-evoking stimuli and are smaller than normal</li>
+            <li>Psychopathic violence is not done in aroused reaction to provocation. Instead, it is purely instrumental, using others as a means to an end with emotionless, remorseless indifference</li>
+          </ul>
+
+          <h4>The frontal cortex</h4>
+          <blockquote>The frontal cortex makes you do the harder thing when it's the right thing to do.</blockquote>
+          <ul>
+            <li><strong>Cognition</strong> — the ability to orchestrate thought and action in accordance with internal goals</li>
+            <li><strong>Cognitive load</strong> — when we make the frontal cortex work hard (tough working-memory task, regulating social behavior, numerous decisions), afterward performance on different frontally dependent tasks declines</li>
+            <li>Importantly: increase cognitive load on the frontal cortex, and afterward subjects become <em>less prosocial</em> — less charitable or helpful, more likely to lie. Or increase cognitive load with difficult emotional regulation, and subjects cheat more on their diets afterward</li>
+            <li>The frontal cortex is not fully developed in teens, which can cause the amygdala to be increasingly activated</li>
+          </ul>
+
+          <h4>dlPFC vs vmPFC</h4>
+          <ul>
+            <li><strong>dlPFC</strong> (dorsolateral prefrontal cortex) — the decider of deciders; the most rational, cognitive, utilitarian, unsentimental part of the PFC; the most recently evolved part and last to fully mature; mostly talks to other cortical regions</li>
+            <li><strong>vmPFC</strong> (ventromedial prefrontal cortex) — all about the impact of emotion on decision making; many of our best and worst behaviors involve interactions of the vmPFC with the limbic system</li>
+          </ul>
+        `
+      },
+      {
+        title: 'Chapter 3: Seconds to Minutes Before',
+        date: 'April 29, 2020',
+        content: `
+          <p><em>Notes to be added. Use Claude to fill this in — paste in your notes and ask me to add them.</em></p>
+        `
+      },
+      {
+        title: 'Chapter 4: Hours to Days Before',
+        date: 'May 1, 2020',
+        content: `
+          <p><em>Notes to be added. Use Claude to fill this in — paste in your notes and ask me to add them.</em></p>
+        `
+      }
+    ]
+  },
+
+  'think-again': {
+    title: 'Think Again: The Power of Knowing What You Don\'t Know',
+    tag: 'books',
+    tagLabel: 'Book',
+    description: 'Adam Grant on the value of rethinking, intellectual humility, and updating your beliefs.',
+    notes: []
+  },
+
+  'four-thousand': {
+    title: 'Four Thousand Weeks: Time Management for Mortals',
+    tag: 'books',
+    tagLabel: 'Book',
+    description: 'Oliver Burkeman\'s case for accepting your finite time and choosing deliberately.',
+    notes: []
+  }
+};
+
+// ── Search index ──
+const SEARCH_INDEX = [];
+Object.entries(COURSES).forEach(([id, course]) => {
+  course.notes.forEach(note => {
+    const text = note.content.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    SEARCH_INDEX.push({ courseId: id, courseTitle: course.title, noteTitle: note.title, text, tagLabel: course.tagLabel });
+  });
+  SEARCH_INDEX.push({ courseId: id, courseTitle: course.title, noteTitle: course.title, text: course.description, tagLabel: course.tagLabel });
+});
+</script>
+
+
+<!-- ══════════════════════════════════════
+     LOGIC
+══════════════════════════════════════ -->
+<script>
+let currentView = 'home';
+let previousView = 'home';
+let previousCourse = null;
+
+function setActive(btn) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function showView(name) {
+  previousView = currentView;
+  currentView = name;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  showView('home');
+  document.querySelectorAll('.nav-btn').forEach((b,i) => { if(i===0) b.classList.add('active'); else b.classList.remove('active'); });
+  document.getElementById('globalSearch').value = '';
+}
+
+function showCourse(id) {
+  previousCourse = id;
+  const course = COURSES[id];
+  if (!course) return;
+
+  const tagClass = 'tag-' + course.tag;
+  let html = `
+    <div class="course-hero">
+      <div class="course-hero-eyebrow">${course.tagLabel}</div>
+      <h2>${course.title}</h2>
+      <p>${course.description}</p>
+    </div>
+  `;
+
+  if (course.notes.length === 0) {
+    html += `<div style="padding:32px;text-align:center;background:var(--white);border:1px solid var(--border);border-radius:12px;color:var(--text-muted);font-size:14px;">
+      No notes yet for this course. Paste your notes into Claude and ask it to add them here.
+    </div>`;
+  } else {
+    course.notes.forEach((note, i) => {
+      html += `
+        <div class="note-card" id="nc-${id}-${i}">
+          <div class="note-card-header" onclick="toggleNote('nc-${id}-${i}')">
+            <div>
+              <div class="note-card-title">${note.title}</div>
+              <div class="note-card-date" style="font-size:12px;color:var(--text-muted);margin-top:3px;">${note.date}</div>
+            </div>
+            <div class="note-toggle">+</div>
+          </div>
+          <div class="note-card-body">
+            <div class="note-content">${note.content}</div>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  document.getElementById('courseContent').innerHTML = html;
+  showView('course');
+}
+
+function toggleNote(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+function goBack() {
+  showHome();
+}
+
+function showSection(section) {
+  let html = '';
+  if (section === 'courses') {
+    html = `<div class="section-head"><div class="section-title">All Courses</div></div><div class="cards-grid">`;
+    Object.entries(COURSES).filter(([id, c]) => c.tag !== 'books').forEach(([id, course]) => {
+      html += `<div class="course-card" onclick="showCourse('${id}')">
+        <div><span class="tag tag-${course.tag}">${course.tagLabel}</span><h3>${course.title}</h3></div>
+        <p style="margin-top:8px;font-size:13px;color:var(--text-muted)">${course.description}</p>
+        <div class="card-footer"><span class="card-meta">${course.notes.length} note${course.notes.length !== 1 ? 's' : ''}</span><span class="card-arrow">→</span></div>
+      </div>`;
+    });
+    html += '</div>';
+  } else if (section === 'books') {
+    html = `<div class="section-head"><div class="section-title">Books</div></div>`;
+    const spines = { 'behave': '#534AB7', 'think-again': '#1D9E75', 'four-thousand': '#BA7517' };
+    Object.entries(COURSES).filter(([id, c]) => c.tag === 'books').forEach(([id, course]) => {
+      html += `<div class="book-item" onclick="showCourse('${id}')">
+        <div class="book-spine" style="background:${spines[id]||'#888'}"></div>
+        <div class="book-info"><h4>${course.title}</h4><p>${course.description}</p></div>
+        <span class="book-count">${course.notes.length} note${course.notes.length !== 1 ? 's' : ''} →</span>
+      </div>`;
+    });
+  } else if (section === 'career') {
+    html = `<div class="section-head"><div class="section-title">Career Planning</div></div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:32px;color:var(--text-muted);font-size:14px;line-height:1.7;">
+      <p>Career planning notes, informational interview templates, and job search strategies.</p>
+      <p style="margin-top:12px;font-style:italic;">Add your notes here — paste them into Claude and ask it to populate this section.</p>
+    </div>`;
+  } else if (section === 'quotes') {
+    html = `<div class="section-head"><div class="section-title">Words &amp; Quotes</div></div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;padding:32px;color:var(--text-muted);font-size:14px;line-height:1.7;">
+      <p>Memorable quotes, phrases, and words of wisdom collected during the MBA program.</p>
+      <p style="margin-top:12px;font-style:italic;">Add your quotes here — paste them into Claude and ask it to populate this section.</p>
+    </div>`;
+  }
+  document.getElementById('sectionContent').innerHTML = html;
+  showView('section');
+}
+
+// ── FILTER ──
+function filterCards(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#courseGrid .course-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// ── SEARCH ──
+function handleSearch(q) {
+  if (!q.trim()) { showHome(); return; }
+  runSearch(q.trim());
+}
+
+function quickSearch(q) {
+  document.getElementById('globalSearch').value = q;
+  runSearch(q);
+}
+
+function runSearch(q) {
+  const lower = q.toLowerCase();
+  const results = SEARCH_INDEX.filter(item =>
+    item.noteTitle.toLowerCase().includes(lower) ||
+    item.text.toLowerCase().includes(lower) ||
+    item.courseTitle.toLowerCase().includes(lower)
+  );
+
+  document.getElementById('searchHeading').textContent = results.length
+    ? `${results.length} result${results.length !== 1 ? 's' : ''} for "${q}"`
+    : `No results for "${q}"`;
+  document.getElementById('searchEmpty').textContent = results.length ? '' : 'Try a different search term or browse by course above.';
+
+  const container = document.getElementById('searchResults');
+  container.innerHTML = results.map(r => {
+    const idx = r.text.toLowerCase().indexOf(lower);
+    let snippet = '';
+    if (idx !== -1) {
+      const start = Math.max(0, idx - 60);
+      const end = Math.min(r.text.length, idx + lower.length + 100);
+      snippet = (start > 0 ? '…' : '') + r.text.slice(start, end).replace(new RegExp(q, 'gi'), m => `<mark>${m}</mark>`) + (end < r.text.length ? '…' : '');
+    }
+    return `<div class="search-result-item" onclick="showCourse('${r.courseId}')">
+      <div class="result-path">${r.tagLabel} · ${r.courseTitle}</div>
+      <div class="result-title">${r.noteTitle.replace(new RegExp(q, 'gi'), m => `<mark>${m}</mark>`)}</div>
+      ${snippet ? `<div class="result-snippet">${snippet}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  showView('search');
+}
+</script>
+
+</body>
+</html>
