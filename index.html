@@ -417,6 +417,98 @@
       margin-top: 0.15rem;
     }
 
+
+    .framework-hero {
+      padding-top: 0.4rem;
+    }
+
+    .framework-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1.35fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .framework-featured {
+      background: linear-gradient(180deg, #ffffff 0%, #fcf6ee 100%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .framework-featured::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--usc-cardinal) 0 78%, var(--usc-gold) 78% 100%);
+    }
+
+    .framework-featured p {
+      margin: 0.7rem 0 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .framework-callout {
+      background: #111;
+      color: white;
+      border-radius: 18px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .framework-callout strong {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: white;
+    }
+
+    .framework-callout span {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+      display: block;
+      font-size: 0.94rem;
+    }
+
+    .framework-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .framework-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.15rem;
+      box-shadow: 0 8px 24px rgba(18,18,18,0.05);
+      transition: 0.18s ease;
+    }
+
+    .framework-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(153, 0, 0, 0.35);
+    }
+
+    .framework-card small {
+      display: inline-block;
+      color: var(--usc-cardinal);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    .framework-card p {
+      margin: 0.55rem 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
     .two-col {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
@@ -503,6 +595,8 @@
 
     @media (max-width: 980px) {
       .hero-grid,
+      .framework-hero-grid,
+      .framework-grid,
       .two-col,
       .footer-grid,
       .cards {
@@ -532,10 +626,10 @@
         <span class="brand-sub">Frameworks, summaries, and usable lessons from the MBA curriculum.</span>
       </div>
       <nav class="nav-links" aria-label="Primary">
+        <a href="#frameworks">Frameworks</a>
         <a href="#courses">Courses</a>
         <a href="#books">Books</a>
         <a href="#recent">Recent Notes</a>
-        <a href="#frameworks">Frameworks</a>
       </nav>
     </div>
   </header>
@@ -550,8 +644,8 @@
             Distilled notes, frameworks, and takeaways from coursework, readings, and career planning — organized to be fast to scan, easy to revisit, and actually useful in the real world.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#courses">Browse courses</a>
-            <a class="btn btn-secondary" href="#recent">See recent notes</a>
+            <a class="btn btn-primary" href="#frameworks">Browse key frameworks</a>
+            <a class="btn btn-secondary" href="#courses">Browse courses</a>
           </div>
           <label class="search-wrap" aria-label="Search notes">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -563,8 +657,8 @@
 
         <aside class="hero-side">
           <div class="stat-grid">
+            <div class="stat"><strong>6</strong><span>Frameworks</span></div>
             <div class="stat"><strong>7</strong><span>Courses</span></div>
-            <div class="stat"><strong>3</strong><span>Books</span></div>
             <div class="stat"><strong>6</strong><span>Notes</span></div>
           </div>
           <div class="quote">
@@ -580,6 +674,54 @@
             </p>
           </div>
         </aside>
+      </div>
+    </section>
+
+
+    <section id="frameworks" class="framework-hero">
+      <div class="container framework-hero-grid">
+        <div class="framework-featured">
+          <div class="eyebrow" style="margin-bottom:0.55rem;">Key concepts &amp; frameworks</div>
+          <h2>Put the reusable ideas first.</h2>
+          <p>Instead of burying the best stuff below the fold, this section gives the core MBA mental models prime placement. This is the part you should be able to revisit before meetings, interviews, presentations, or decisions.</p>
+          <div class="framework-callout">
+            <strong>How to use this page</strong>
+            <span>Start with frameworks. Drop into courses when you want full context. Treat the rest of the site like source material, not the homepage headline.</span>
+          </div>
+        </div>
+
+        <div class="framework-grid">
+          <article class="framework-card searchable" data-tags="porter five forces strategy competition competitive analysis">
+            <small>Strategy</small>
+            <h3>Porter’s 5 Forces</h3>
+            <p>A fast lens for industry attractiveness, bargaining power, substitution risk, and competitive intensity.</p>
+          </article>
+          <article class="framework-card searchable" data-tags="wacc finance valuation cost of capital">
+            <small>Finance</small>
+            <h3>WACC</h3>
+            <p>The baseline hurdle rate behind valuation, capital allocation, and how you think about financing decisions.</p>
+          </article>
+          <article class="framework-card searchable" data-tags="kotter 8 steps communication change management">
+            <small>Communication</small>
+            <h3>Kotter’s 8 Steps</h3>
+            <p>A clean change-management sequence for getting buy-in, sustaining momentum, and making change stick.</p>
+          </article>
+          <article class="framework-card searchable" data-tags="psychological safety team effectiveness management leadership">
+            <small>Management</small>
+            <h3>Psychological Safety</h3>
+            <p>The operating condition that lets teams surface risk, challenge assumptions, and learn faster.</p>
+          </article>
+          <article class="framework-card searchable" data-tags="power decision making influence leadership">
+            <small>Leadership</small>
+            <h3>Power &amp; Decision-Making</h3>
+            <p>Who really shapes outcomes, how influence travels, and why authority alone rarely explains the result.</p>
+          </article>
+          <article class="framework-card searchable" data-tags="organizational culture org design incentives structure">
+            <small>Org Design</small>
+            <h3>Organizational Culture</h3>
+            <p>The interaction between incentives, structure, norms, and behavior over time.</p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -726,16 +868,13 @@
           </div>
         </div>
 
-        <aside class="list-card" id="frameworks">
-          <div class="eyebrow" style="margin-bottom:0.55rem;">Key frameworks</div>
-          <h2 style="margin-bottom:0.8rem;">Fast-glance concepts.</h2>
+        <aside class="list-card">
+          <div class="eyebrow" style="margin-bottom:0.55rem;">How the site is organized</div>
+          <h2 style="margin-bottom:0.8rem;">Frameworks first. Details second.</h2>
           <div class="framework-list">
-            <div class="framework-item searchable" data-tags="porter five forces strategy competition"><small>Strategy</small><strong>Porter’s 5 Forces</strong></div>
-            <div class="framework-item searchable" data-tags="wacc finance valuation"><small>Finance</small><strong>WACC</strong></div>
-            <div class="framework-item searchable" data-tags="kotter 8 steps communication change"><small>Communication</small><strong>Kotter’s 8 Steps</strong></div>
-            <div class="framework-item searchable" data-tags="psychological safety team effectiveness"><small>Management</small><strong>Psychological Safety</strong></div>
-            <div class="framework-item searchable" data-tags="power decision making influence"><small>Leadership</small><strong>Power &amp; Decision-Making</strong></div>
-            <div class="framework-item searchable" data-tags="organizational culture org design"><small>Org Design</small><strong>Organizational Culture</strong></div>
+            <div class="framework-item"><small>1</small><strong>Start with the mental model</strong></div>
+            <div class="framework-item"><small>2</small><strong>Open the related course for context</strong></div>
+            <div class="framework-item"><small>3</small><strong>Use recent notes for the freshest additions</strong></div>
           </div>
         </aside>
       </div>
