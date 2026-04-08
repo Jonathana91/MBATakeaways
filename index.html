@@ -3,939 +3,155 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MBA Takeaways</title>
-  <meta name="description" content="Distilled notes, frameworks, and takeaways from a USC Marshall MBA curriculum — organized for quick reference." />
-  <style>
-    :root {
-      --usc-cardinal: #990000;
-      --usc-gold: #FFCC00;
-      --ink: #121212;
-      --muted: #5f6368;
-      --border: #e7e2dc;
-      --bg: #fbfaf8;
-      --surface: #ffffff;
-      --surface-soft: #f4f1ec;
-      --shadow: 0 14px 40px rgba(18, 18, 18, 0.08);
-      --radius: 18px;
-      --max: 1180px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: linear-gradient(to bottom, #fff 0%, var(--bg) 100%);
-    }
-
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    .topline {
-      height: 5px;
-      background: linear-gradient(90deg, var(--usc-cardinal) 0 86%, var(--usc-gold) 86% 100%);
-    }
-
-    .container {
-      width: min(var(--max), calc(100% - 2rem));
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(153, 0, 0, 0.08);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1rem 0;
-    }
-
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .brand-kicker {
-      font-size: 0.72rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--usc-cardinal);
-      font-weight: 700;
-    }
-
-    .brand-title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(1.35rem, 2vw, 1.75rem);
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .brand-sub {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.2rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      position: relative;
-      font-weight: 600;
-      color: #2a2a2a;
-      padding: 0.35rem 0;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -0.15rem;
-      width: 100%;
-      height: 2px;
-      background: var(--usc-cardinal);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.2s ease;
-    }
-
-    .nav-links a:hover::after,
-    .nav-links a:focus-visible::after { transform: scaleX(1); }
-
-    .hero {
-      padding: 4.25rem 0 2rem;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.35fr 0.9fr;
-      gap: 2rem;
-      align-items: stretch;
-    }
-
-    .hero-main,
-    .hero-side {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .hero-main {
-      padding: clamp(1.5rem, 3vw, 2.4rem);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-main::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto auto 0;
-      width: 100%;
-      height: 6px;
-      background: linear-gradient(90deg, var(--usc-cardinal) 0 78%, var(--usc-gold) 78% 100%);
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--usc-cardinal);
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 1.5rem;
-      height: 2px;
-      background: var(--usc-gold);
-    }
-
-    h1, h2, h3, h4 {
-      font-family: Georgia, "Times New Roman", serif;
-      margin: 0;
-      letter-spacing: -0.02em;
-    }
-
-    h1 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      line-height: 0.98;
-      max-width: 12ch;
-    }
-
-    .hero-copy {
-      font-size: 1.05rem;
-      line-height: 1.75;
-      color: #303030;
-      max-width: 62ch;
-      margin: 1.15rem 0 1.6rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.6rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1.15rem;
-      border-radius: 999px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-    }
-
-    .btn:hover { transform: translateY(-1px); }
-
-    .btn-primary {
-      background: var(--usc-cardinal);
-      color: white;
-      box-shadow: 0 10px 24px rgba(153, 0, 0, 0.2);
-    }
-
-    .btn-secondary {
-      background: white;
-      border-color: var(--border);
-    }
-
-    .search-wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      background: var(--surface-soft);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 0.95rem 1rem;
-    }
-
-    .search-wrap input {
-      border: 0;
-      outline: 0;
-      background: transparent;
-      font: inherit;
-      width: 100%;
-      color: var(--ink);
-    }
-
-    .search-wrap svg { flex: 0 0 auto; color: var(--usc-cardinal); }
-
-    .hero-side {
-      padding: 1.4rem;
-      display: grid;
-      grid-template-rows: auto auto 1fr;
-      gap: 1rem;
-    }
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.85rem;
-    }
-
-    .stat {
-      background: var(--surface-soft);
-      border-radius: 16px;
-      padding: 1rem;
-      border: 1px solid var(--border);
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.6rem;
-      font-family: Georgia, "Times New Roman", serif;
-      color: var(--usc-cardinal);
-    }
-
-    .stat span {
-      display: block;
-      margin-top: 0.3rem;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .quote {
-      background: #111;
-      color: white;
-      border-radius: 20px;
-      padding: 1.3rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 4px;
-      background: var(--usc-gold);
-    }
-
-    .quote p {
-      margin: 0 0 0.8rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.92);
-    }
-
-    .quote small {
-      color: rgba(255,255,255,0.7);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    section {
-      padding: 1.6rem 0 0.8rem;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-head p {
-      margin: 0.5rem 0 0;
-      color: var(--muted);
-      max-width: 62ch;
-      line-height: 1.7;
-    }
-
-    .filters {
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      margin: 1rem 0 1.4rem;
-    }
-
-    .chip {
-      border: 1px solid var(--border);
-      background: white;
-      color: #333;
-      border-radius: 999px;
-      padding: 0.6rem 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .chip:hover,
-    .chip.active {
-      background: var(--usc-cardinal);
-      color: white;
-      border-color: var(--usc-cardinal);
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      box-shadow: 0 8px 24px rgba(18,18,18,0.04);
-      display: flex;
-      flex-direction: column;
-      gap: 0.9rem;
-      min-height: 100%;
-    }
-
-    .card:hover {
-      border-color: rgba(153, 0, 0, 0.35);
-      transform: translateY(-2px);
-      transition: 0.18s ease;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      width: fit-content;
-      gap: 0.45rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--usc-cardinal);
-      font-weight: 800;
-    }
-
-    .tag::before {
-      content: "";
-      width: 0.5rem;
-      height: 0.5rem;
-      border-radius: 999px;
-      background: var(--usc-gold);
-      box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.14);
-    }
-
-    .card p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .meta {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-top: auto;
-    }
-
-    .link-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      color: var(--usc-cardinal);
-      font-weight: 700;
-      margin-top: 0.15rem;
-    }
-
-
-    .framework-hero {
-      padding-top: 0.4rem;
-    }
-
-    .framework-hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1.35fr;
-      gap: 1rem;
-      align-items: start;
-    }
-
-    .framework-featured {
-      background: linear-gradient(180deg, #ffffff 0%, #fcf6ee 100%);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 1.4rem;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .framework-featured::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 6px;
-      background: linear-gradient(90deg, var(--usc-cardinal) 0 78%, var(--usc-gold) 78% 100%);
-    }
-
-    .framework-featured p {
-      margin: 0.7rem 0 1rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    .framework-callout {
-      background: #111;
-      color: white;
-      border-radius: 18px;
-      padding: 1rem;
-      margin-top: 1rem;
-    }
-
-    .framework-callout strong {
-      display: block;
-      margin-bottom: 0.4rem;
-      color: white;
-    }
-
-    .framework-callout span {
-      color: rgba(255,255,255,0.78);
-      line-height: 1.6;
-      display: block;
-      font-size: 0.94rem;
-    }
-
-    .framework-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
-    }
-
-    .framework-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.15rem;
-      box-shadow: 0 8px 24px rgba(18,18,18,0.05);
-      transition: 0.18s ease;
-    }
-
-    .framework-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(153, 0, 0, 0.35);
-    }
-
-    .framework-card small {
-      display: inline-block;
-      color: var(--usc-cardinal);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.5rem;
-    }
-
-    .framework-card p {
-      margin: 0.55rem 0 0;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 1rem;
-      align-items: start;
-    }
-
-    .list-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding: 1.2rem;
-    }
-
-    .recent-list {
-      display: grid;
-      gap: 0.9rem;
-    }
-
-    .recent-item {
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .recent-item:last-child { border-bottom: 0; }
-
-    .recent-item small,
-    .framework-item small {
-      display: block;
-      color: var(--muted);
-      margin-bottom: 0.35rem;
-    }
-
-    .framework-list {
-      display: grid;
-      gap: 0.7rem;
-    }
-
-    .framework-item {
-      background: var(--surface-soft);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 0.95rem 1rem;
-    }
-
-    .framework-item strong { display: block; }
-
-    footer {
-      margin-top: 3rem;
-      background: white;
-      border-top: 3px solid var(--usc-cardinal);
-    }
-
-    .footer-grid {
-      padding: 1.6rem 0 2rem;
-      display: grid;
-      grid-template-columns: 1.2fr 0.7fr 0.7fr;
-      gap: 1.2rem;
-    }
-
-    .footer-grid p,
-    .footer-grid li,
-    .footer-grid a {
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .footer-grid ul {
-      list-style: none;
-      padding: 0;
-      margin: 0.5rem 0 0;
-    }
-
-    .footer-grid li + li { margin-top: 0.35rem; }
-
-    .muted-note {
-      margin-top: 0.9rem;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .hidden { display: none !important; }
-
-    @media (max-width: 980px) {
-      .hero-grid,
-      .framework-hero-grid,
-      .framework-grid,
-      .two-col,
-      .footer-grid,
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .stat-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (max-width: 640px) {
-      .nav { align-items: flex-start; flex-direction: column; }
-      .nav-links { gap: 0.85rem; }
-      .hero { padding-top: 2.5rem; }
-      .stat-grid { grid-template-columns: 1fr; }
-      .hero-main, .hero-side, .list-card { border-radius: 18px; }
-      .section-head { align-items: start; flex-direction: column; }
-    }
-  </style>
+  <title>MBA Takeaways — Operator Handbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="topline"></div>
-  <header>
-    <div class="container nav">
-      <div class="brand">
-        <span class="brand-kicker">USC Marshall-inspired notes</span>
-        <a href="#top" class="brand-title">MBA Takeaways</a>
-        <span class="brand-sub">Frameworks, summaries, and usable lessons from the MBA curriculum.</span>
-      </div>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#frameworks">Frameworks</a>
-        <a href="#courses">Courses</a>
-        <a href="#books">Books</a>
-        <a href="#recent">Recent Notes</a>
-      </nav>
+
+<div class="topbar">
+  <div class="container nav">
+    <div>
+      <div class="brand-title"><a href="index.html">MBA Takeaways</a></div>
+      <div class="brand-sub">Operator Handbook — concise, practical, real-world</div>
     </div>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-main">
-          <div class="eyebrow">USC Marshall School of Business</div>
-          <h1>Key lessons from my MBA curriculum.</h1>
-          <p class="hero-copy">
-            Distilled notes, frameworks, and takeaways from coursework, readings, and career planning — organized to be fast to scan, easy to revisit, and actually useful in the real world.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#frameworks">Browse key frameworks</a>
-            <a class="btn btn-secondary" href="#courses">Browse courses</a>
-          </div>
-          <label class="search-wrap" aria-label="Search notes">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M21 21L16.65 16.65M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <input id="searchInput" type="search" placeholder="Search topics, classes, books, or frameworks…" />
-          </label>
-        </div>
-
-        <aside class="hero-side">
-          <div class="stat-grid">
-            <div class="stat"><strong>6</strong><span>Frameworks</span></div>
-            <div class="stat"><strong>7</strong><span>Courses</span></div>
-            <div class="stat"><strong>6</strong><span>Notes</span></div>
-          </div>
-          <div class="quote">
-            <p>
-              A good notes site should feel less like a blog archive and more like a private operating manual.
-            </p>
-            <small>MBA Takeaways philosophy</small>
-          </div>
-          <div class="list-card" style="padding:1rem 1rem 1.1rem; box-shadow:none;">
-            <div class="tag">What this site is for</div>
-            <p style="margin-top:0.65rem;">
-              Quick refreshers before meetings, frameworks worth reusing, and highlights that deserve to survive the course itself.
-            </p>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-
-    <section id="frameworks" class="framework-hero">
-      <div class="container framework-hero-grid">
-        <div class="framework-featured">
-          <div class="eyebrow" style="margin-bottom:0.55rem;">Key concepts &amp; frameworks</div>
-          <h2>Put the reusable ideas first.</h2>
-          <p>Instead of burying the best stuff below the fold, this section gives the core MBA mental models prime placement. This is the part you should be able to revisit before meetings, interviews, presentations, or decisions.</p>
-          <div class="framework-callout">
-            <strong>How to use this page</strong>
-            <span>Start with frameworks. Drop into courses when you want full context. Treat the rest of the site like source material, not the homepage headline.</span>
-          </div>
-        </div>
-
-        <div class="framework-grid">
-          <article class="framework-card searchable" data-tags="porter five forces strategy competition competitive analysis">
-            <small>Strategy</small>
-            <h3>Porter’s 5 Forces</h3>
-            <p>A fast lens for industry attractiveness, bargaining power, substitution risk, and competitive intensity.</p>
-          </article>
-          <article class="framework-card searchable" data-tags="wacc finance valuation cost of capital">
-            <small>Finance</small>
-            <h3>WACC</h3>
-            <p>The baseline hurdle rate behind valuation, capital allocation, and how you think about financing decisions.</p>
-          </article>
-          <article class="framework-card searchable" data-tags="kotter 8 steps communication change management">
-            <small>Communication</small>
-            <h3>Kotter’s 8 Steps</h3>
-            <p>A clean change-management sequence for getting buy-in, sustaining momentum, and making change stick.</p>
-          </article>
-          <article class="framework-card searchable" data-tags="psychological safety team effectiveness management leadership">
-            <small>Management</small>
-            <h3>Psychological Safety</h3>
-            <p>The operating condition that lets teams surface risk, challenge assumptions, and learn faster.</p>
-          </article>
-          <article class="framework-card searchable" data-tags="power decision making influence leadership">
-            <small>Leadership</small>
-            <h3>Power &amp; Decision-Making</h3>
-            <p>Who really shapes outcomes, how influence travels, and why authority alone rarely explains the result.</p>
-          </article>
-          <article class="framework-card searchable" data-tags="organizational culture org design incentives structure">
-            <small>Org Design</small>
-            <h3>Organizational Culture</h3>
-            <p>The interaction between incentives, structure, norms, and behavior over time.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="courses">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow" style="margin-bottom:0.55rem;">MBA courses</div>
-            <h2>Organized by subject, not by clutter.</h2>
-            <p>Cleaner cards, more hierarchy, and a stronger academic feel. Filter by topic below.</p>
-          </div>
-        </div>
-
-        <div class="filters" aria-label="Filters">
-          <button class="chip active" data-filter="all">All</button>
-          <button class="chip" data-filter="strategy">Strategy</button>
-          <button class="chip" data-filter="finance">Finance</button>
-          <button class="chip" data-filter="leadership">Leadership</button>
-          <button class="chip" data-filter="communication">Communication</button>
-          <button class="chip" data-filter="management">Management</button>
-          <button class="chip" data-filter="org design">Org Design</button>
-        </div>
-
-        <div class="cards" id="courseGrid">
-          <article class="card searchable" data-tags="strategy competitive analysis porter corporate strategy frameworks course">
-            <div class="tag">Strategy</div>
-            <h3>Strategic Formulation for Competitive Analysis</h3>
-            <p>Porter’s 5 Forces, competitive advantage, the kernel of good strategy, and corporate strategy frameworks.</p>
-            <div class="meta"><span>USC Marshall</span><span>Homepage overview</span></div>
-            <a href="#" class="link-row">Open course →</a>
-          </article>
-
-          <article class="card searchable" data-tags="management leadership decision making organizational behavior google innovation course managerial perspectives">
-            <div class="tag">Management</div>
-            <h3>Managerial Perspectives</h3>
-            <p>Team dynamics, leadership, power, decision-making, organizational behavior, and innovation at Google.</p>
-            <div class="meta"><span>2 notes</span><span>People + systems</span></div>
-            <a href="#recent" class="link-row">See related notes →</a>
-          </article>
-
-          <article class="card searchable" data-tags="communication managers storytelling headline first executive presentations kotter course">
-            <div class="tag">Communication</div>
-            <h3>Communication for Managers</h3>
-            <p>Executive presentations, Kotter’s 8-step change model, storytelling structure, and headline-first communication.</p>
-            <div class="meta"><span>1 note</span><span>Presentation craft</span></div>
-            <a href="#recent" class="link-row">See related notes →</a>
-          </article>
-
-          <article class="card searchable" data-tags="finance corporate financing wacc m&a valuation capital structure course">
-            <div class="tag">Finance</div>
-            <h3>Corporate Financing</h3>
-            <p>Capital structure, WACC, M&amp;A, and valuation frameworks. Set up as a ready slot for future notes.</p>
-            <div class="meta"><span>Notes coming soon</span><span>Core finance</span></div>
-            <a href="#frameworks" class="link-row">Browse finance frameworks →</a>
-          </article>
-
-          <article class="card searchable" data-tags="leadership negotiation persuasion influence power biases course interpersonal">
-            <div class="tag">Leadership</div>
-            <h3>Interpersonal Influence and Power</h3>
-            <p>Negotiation, persuasion, peer influence, power dynamics, and the biases that shape decisions.</p>
-            <div class="meta"><span>Notes coming soon</span><span>Influence</span></div>
-            <a href="#frameworks" class="link-row">See key concepts →</a>
-          </article>
-
-          <article class="card searchable" data-tags="finance valuation dcf comparables modeling multiples course">
-            <div class="tag">Finance</div>
-            <h3>Financial Analysis &amp; Valuation</h3>
-            <p>DCF, comparable company analysis, financial modeling, and valuation multiples in one track.</p>
-            <div class="meta"><span>Notes coming soon</span><span>Valuation</span></div>
-            <a href="#frameworks" class="link-row">Browse valuation topics →</a>
-          </article>
-
-          <article class="card searchable" data-tags="org design culture incentives structure course organizations">
-            <div class="tag">Org Design</div>
-            <h3>Designing High Performance Organizations</h3>
-            <p>Culture, incentives, organizational structure, and what actually drives high-performance teams.</p>
-            <div class="meta"><span>Notes coming soon</span><span>Org design</span></div>
-            <a href="#frameworks" class="link-row">View related concepts →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="books">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow" style="margin-bottom:0.55rem;">Books</div>
-            <h2>Supporting reads worth keeping.</h2>
-            <p>Same structure, better polish. Books sit as part of the learning system instead of floating off as an afterthought.</p>
-          </div>
-        </div>
-
-        <div class="cards">
-          <article class="card searchable" data-tags="behave biology humans sapolsky neuroscience book">
-            <div class="tag">Book</div>
-            <h3>Behave: The Biology of Humans</h3>
-            <p>Robert Sapolsky. Behavioral science, biology, and decision-making foundations that connect directly to leadership and management.</p>
-            <div class="meta"><span>2 chapters</span><span>Behavioral science</span></div>
-            <a href="#recent" class="link-row">Read chapter notes →</a>
-          </article>
-
-          <article class="card searchable" data-tags="think again adam grant rethinking book">
-            <div class="tag">Book</div>
-            <h3>Think Again</h3>
-            <p>Adam Grant. Rethinking, intellectual humility, and how better decisions often start with dropping certainty.</p>
-            <div class="meta"><span>Notes coming</span><span>Decision quality</span></div>
-            <a href="#" class="link-row">Add notes →</a>
-          </article>
-
-          <article class="card searchable" data-tags="four thousand weeks oliver burkeman time management book">
-            <div class="tag">Book</div>
-            <h3>Four Thousand Weeks</h3>
-            <p>Oliver Burkeman. Time, tradeoffs, and the limits that force better prioritization.</p>
-            <div class="meta"><span>Notes coming</span><span>Time &amp; focus</span></div>
-            <a href="#" class="link-row">Add notes →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="recent">
-      <div class="container two-col">
-        <div class="list-card">
-          <div class="eyebrow" style="margin-bottom:0.55rem;">Recent notes</div>
-          <h2 style="margin-bottom:0.5rem;">Freshest entries, easier to skim.</h2>
-          <div class="recent-list">
-            <div class="recent-item searchable" data-tags="managerial perspectives team managing your team note">
-              <small>Managerial Perspectives · Apr 17, 2020</small>
-              <h3 style="font-size:1.25rem;">HBR Article: Managing Your Team</h3>
-            </div>
-            <div class="recent-item searchable" data-tags="managerial perspectives additional thoughts takeaways note">
-              <small>Managerial Perspectives · Apr 17, 2020</small>
-              <h3 style="font-size:1.25rem;">Additional Thoughts and Takeaways</h3>
-            </div>
-            <div class="recent-item searchable" data-tags="communication managers my takeaways note">
-              <small>Communication for Managers · Apr 18, 2020</small>
-              <h3 style="font-size:1.25rem;">My Takeaways: Communication for Managers</h3>
-            </div>
-            <div class="recent-item searchable" data-tags="behave chapter one second before note">
-              <small>Behave · Apr 26, 2020</small>
-              <h3 style="font-size:1.25rem;">Chapter 2: One Second Before</h3>
-            </div>
-          </div>
-        </div>
-
-        <aside class="list-card">
-          <div class="eyebrow" style="margin-bottom:0.55rem;">How the site is organized</div>
-          <h2 style="margin-bottom:0.8rem;">Frameworks first. Details second.</h2>
-          <div class="framework-list">
-            <div class="framework-item"><small>1</small><strong>Start with the mental model</strong></div>
-            <div class="framework-item"><small>2</small><strong>Open the related course for context</strong></div>
-            <div class="framework-item"><small>3</small><strong>Use recent notes for the freshest additions</strong></div>
-          </div>
-        </aside>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-grid">
-      <div>
-        <div class="brand-kicker">MBA Takeaways</div>
-        <h3 style="margin-top:0.25rem;">A cleaner home for course notes.</h3>
-        <p>
-          Rebuilt with a sharper USC Marshall-inspired palette: mostly neutral, cardinal for emphasis, and gold used with restraint.
-        </p>
-        <div class="muted-note">This design is inspired by USC/Marshall colors, not presented as an official USC site.</div>
-      </div>
-      <div>
-        <h4>Browse</h4>
-        <ul>
-          <li><a href="#courses">Courses</a></li>
-          <li><a href="#books">Books</a></li>
-          <li><a href="#recent">Recent Notes</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Focus</h4>
-        <ul>
-          <li>Quick reference</li>
-          <li>Reusable frameworks</li>
-          <li>Cleaner reading experience</li>
-        </ul>
-      </div>
+    <div class="nav-links">
+      <a href="index.html">Start Here</a>
+      <a href="topics.html">Topics</a>
+      <a href="path.html">Study Order</a>
+      <a href="playbooks.html">Playbooks</a>
     </div>
-  </footer>
+  </div>
+</div>
 
-  <script>
-    const chips = document.querySelectorAll('.chip');
-    const courseCards = document.querySelectorAll('#courseGrid .card');
-    const searchInput = document.getElementById('searchInput');
-    const searchable = document.querySelectorAll('.searchable');
 
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        const filter = chip.dataset.filter;
-        courseCards.forEach(card => {
-          const text = card.dataset.tags || '';
-          const show = filter === 'all' || text.includes(filter);
-          card.classList.toggle('hidden', !show);
-        });
-      });
-    });
+<section class="hero">
+  <div class="container">
+    <div class="kicker">USC Marshall-inspired operator stack</div>
+    <h1>What to study first, what matters most, and how it shows up in real life.</h1>
+    <p>This is not a dump of MBA notes. It is a hierarchy. Start with market reality, move into economics and advantage, then learn growth, decisions, and execution. Everything is short, useful, and grounded in actual business situations.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="path.html">Follow the study order</a>
+      <a class="btn" href="topics.html">Browse by topic</a>
+      <a class="btn" href="playbooks.html">Use the playbooks</a>
+    </div>
+    <div class="stats">
+      <div class="card"><div class="smallhead">How to use this</div><div>Read in order. Apply immediately. Skip fluff.</div></div>
+      <div class="card"><div class="smallhead">What makes it different</div><div>Each framework includes real-life use, what people miss, and what to study next.</div></div>
+      <div class="card"><div class="smallhead">Who it is for</div><div>Anyone who wants to make sharper business decisions faster.</div></div>
+    </div>
+  </div>
+</section>
 
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.trim().toLowerCase();
-      searchable.forEach(item => {
-        const haystack = (item.textContent + ' ' + (item.dataset.tags || '')).toLowerCase();
-        item.classList.toggle('hidden', query && !haystack.includes(query));
-      });
-    });
-  </script>
+<section class="section alt">
+  <div class="container">
+    <h2>Start here: the first 8 you should study</h2>
+    <p class="section-intro">This is the front door. If you only have a few hours, work this order. It gives you the highest decision leverage first.</p>
+    <div class="grid grid-4">
+    <a class="card" href="market-reality.html">
+      <div class="order">1</div>
+      <div class="eyebrow">Strategy</div>
+      <h3>Market Reality</h3>
+      <p><strong>TL;DR:</strong> A great product in a bad market still loses.</p>
+      <p class="mini"><strong>Real life:</strong> Launching yet another food delivery app sounds exciting until you realize customer switching is easy, margins are thin, and competition is brutal.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Porters Five Forces</span></div>
+    </a>
+    <a class="card" href="porters-five-forces.html">
+      <div class="order">2</div>
+      <div class="eyebrow">Strategy</div>
+      <h3>Porter’s Five Forces</h3>
+      <p><strong>TL;DR:</strong> Use it to decide whether an industry is attractive before you commit time or capital.</p>
+      <p class="mini"><strong>Real life:</strong> Airlines are notorious: high fixed costs, heavy competition, little loyalty, and price-sensitive buyers.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Competitive Advantage</span></div>
+    </a>
+    <a class="card" href="competitive-advantage.html">
+      <div class="order">3</div>
+      <div class="eyebrow">Strategy</div>
+      <h3>Competitive Advantage</h3>
+      <p><strong>TL;DR:</strong> If your edge disappears when you stop pushing, it is not a real edge.</p>
+      <p class="mini"><strong>Real life:</strong> Amazon’s logistics scale is not just “good execution.” It lowers costs and improves speed in a way smaller rivals struggle to match.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Unit Economics</span></div>
+    </a>
+    <a class="card" href="unit-economics.html">
+      <div class="order">4</div>
+      <div class="eyebrow">Finance</div>
+      <h3>Unit Economics</h3>
+      <p><strong>TL;DR:</strong> If you lose money on each customer, growth makes the problem bigger.</p>
+      <p class="mini"><strong>Real life:</strong> A startup paying $120 to acquire a customer that only generates $70 in gross profit is not “scaling.” It is accelerating losses.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Contribution Margin</span></div>
+    </a>
+    <a class="card" href="contribution-margin.html">
+      <div class="order">5</div>
+      <div class="eyebrow">Finance</div>
+      <h3>Contribution Margin</h3>
+      <p><strong>TL;DR:</strong> Revenue minus variable costs tells you whether each sale helps cover the business.</p>
+      <p class="mini"><strong>Real life:</strong> A product that sells for $50 with $38 of variable cost leaves only $12 to cover fixed costs, overhead, and profit.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Ltv Cac</span></div>
+    </a>
+    <a class="card" href="ltv-cac.html">
+      <div class="order">6</div>
+      <div class="eyebrow">Finance</div>
+      <h3>LTV vs CAC</h3>
+      <p><strong>TL;DR:</strong> Customer value must clearly exceed customer acquisition cost.</p>
+      <p class="mini"><strong>Real life:</strong> If you spend $300 to win a customer worth $280 gross profit, you bought growth that destroys value.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Customer Truth</span></div>
+    </a>
+    <a class="card" href="customer-truth.html">
+      <div class="order">7</div>
+      <div class="eyebrow">Marketing</div>
+      <h3>Customer Truth</h3>
+      <p><strong>TL;DR:</strong> Customers do not buy products. They hire solutions to make progress.</p>
+      <p class="mini"><strong>Real life:</strong> People did not hire Uber because they loved maps or cars. They hired it because getting a ride became fast, trackable, and painless.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Product Market Fit</span></div>
+    </a>
+    <a class="card" href="product-market-fit.html">
+      <div class="order">8</div>
+      <div class="eyebrow">Product</div>
+      <h3>Product-Market Fit</h3>
+      <p><strong>TL;DR:</strong> You have it when a defined group really wants what you built — and proves it through retention, referrals, or repeated use.</p>
+      <p class="mini"><strong>Real life:</strong> Slack did not win because it had more features than email. Teams kept using it because communication became faster and less painful.</p>
+      <div class="pill-row"><span class="pill">Study this now</span><span class="pill">Then: Pricing Power</span></div>
+    </a></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Browse by topic</h2>
+    <p class="section-intro">Some people learn best by sequence. Others by category. Use either.</p>
+    <div class="topic-strip">
+      <a class="topic-link" href="topic-strategy.html"><strong>Strategy</strong><div class="mini">Markets, competition, moats</div></a>
+      <a class="topic-link" href="topic-finance.html"><strong>Finance</strong><div class="mini">Unit economics, contribution margin, LTV/CAC</div></a>
+      <a class="topic-link" href="topic-economics.html"><strong>Economics</strong><div class="mini">Pricing power, elasticity, incentives</div></a>
+      <a class="topic-link" href="topic-marketing.html"><strong>Marketing</strong><div class="mini">Customer truth, segmentation, demand</div></a>
+      <a class="topic-link" href="topic-product.html"><strong>Product</strong><div class="mini">Product-market fit and adoption</div></a>
+      <a class="topic-link" href="topic-growth.html"><strong>Growth</strong><div class="mini">Loops, retention, compounding</div></a>
+      <a class="topic-link" href="topic-decision-making.html"><strong>Decision Making</strong><div class="mini">Expected value and decision trees</div></a>
+      <a class="topic-link" href="topic-operations.html"><strong>Operations</strong><div class="mini">Prioritization and fast feedback</div></a>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="container">
+    <h2>Operator playbooks</h2>
+    <p class="section-intro">Frameworks are the pieces. Playbooks are how you actually use them.</p>
+    <div class="grid grid-3">
+      <a class="card" href="playbooks.html#evaluate-business"><h3>Evaluate a business in 30 minutes</h3><p>Market → economics → edge → downside. If one fails badly, stop romanticizing it.</p></a>
+      <a class="card" href="playbooks.html#should-enter"><h3>Should you enter this market?</h3><p>Use Five Forces, pricing power, and unit economics before you convince yourself.</p></a>
+      <a class="card" href="playbooks.html#pricing"><h3>How to price without guessing</h3><p>Start from value, test sensitivity, and stop treating price like a vibe.</p></a>
+    </div>
+  </div>
+</section>
+
+
+<div class="footer">
+  <div class="container">
+    <p>Built for fast reading, better decisions, and real-world use — not academic page count.</p>
+  </div>
+</div>
+
 </body>
 </html>
